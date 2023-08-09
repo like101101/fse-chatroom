@@ -1,3 +1,7 @@
+// define macros
+const host = 'localhost';
+const userPort = '3000';
+
 // If the user is already logged in, redirect to the app page
 const token = localStorage.getItem('token');
  
@@ -10,7 +14,7 @@ const login = async () => {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
   
-    const response = await fetch('http://localhost:3000/login', {
+    const response = await fetch(`http://${host}:${userPort}/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -37,7 +41,7 @@ const register = async () => {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
-    const response = await fetch('http://localhost:3000/register', {
+    const response = await fetch(`http://${host}:${userPort}/register`, {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json'

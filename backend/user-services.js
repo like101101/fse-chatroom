@@ -1,13 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
+const secret = process.env.SECRET_KEY;
+
 
 // Database Models 
 const User = require('./models/user');
-
-// JWT for user authentication
-const jwt = require('jsonwebtoken');
-const secret = "kel4@andrew.cmu.edu";
 
 // Create the express app
 const app = express();
@@ -56,5 +55,5 @@ app.post('/register', async (req, res) => {
 
 // Start the server
 app.listen(3000, () => {
-  console.log('Server is running on port 3000');
+  console.log('User server is running on port 3000');
 });
