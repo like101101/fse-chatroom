@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const ws = require('ws');
-const secret = process.env.SECRET_KEY;
+const secret = 'kel4';
 
 // Database Models 
 const Message = require('./models/message');
@@ -55,6 +55,10 @@ wss.on('connection', (socket) => {
   });
 });
 
+wss.on('close', () => {
+  console.log('WebSocket closed');
+});
+
 
 // Message post function
 app.post('/post', verifyToken, async (req, res) => {
@@ -74,20 +78,23 @@ app.post('/post', verifyToken, async (req, res) => {
     res.status(201).json({ message: 'Message sent' });
 
     // Send the message to all clients
-    // wss.clients.forEach(client => {
-    //   if (client.readyState === WebSocket.OPEN) {
-    //     Message.findAll({
-    //       attributes: ['username', 'content', 'time'], 
-    //       order: [['time', 'ASC']]
-    //     })
-    //     .then(messages => {
-    //       client.send(JSON.stringify(messages));
-    //     })
-    //     .catch(error => {
-    //       console.error('Error:', error);
-    //     });
-    //   }
-    // });
+    wss.clients.forEach(client => {
+
+      console.log(client.readyState);
+
+      if (client.readyState === 1) {
+        Message.findAll({
+          attributes: ['username', 'content', 'time'], 
+          order: [['time', 'ASC']]
+        })
+        .then(messages => {
+          client.send(JSON.stringify(messages));
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+      }
+    });
 
   } catch (error) {
     console.error(error);

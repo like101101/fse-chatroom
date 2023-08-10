@@ -6,7 +6,7 @@ if (!token) {
 }
 
 // define macros
-const host = 'localhost';
+const host = '44.208.22.126';
 const messagePort = '3001';
 
 
@@ -48,6 +48,8 @@ const post = async () => {
   } catch (error) {
     console.error(error);
   }
+
+  document.getElementById('input-content').value = '';
 };
 
 // display messages function
