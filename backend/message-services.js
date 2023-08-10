@@ -1,7 +1,7 @@
 const express = require('express');
 const http = require('http');
 const bodyParser = require('body-parser');
-// const cors = require('cors');
+const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const ws = require('ws');
 const secret = 'kel4';
@@ -12,14 +12,12 @@ const Message = require('./models/message');
 // Create the express app
 const app = express();
 app.use(bodyParser.json());
-
-// Enable CORS
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://fse-chatroom-frontend.s3.amazonaws.com');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  next();
-});
+app.use(cors({
+  origin: 'https://fse-chatroom-frontend.s3.amazonaws.com',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // Websocket server
 const server = http.createServer(app);
