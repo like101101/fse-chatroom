@@ -34,7 +34,7 @@ const post = async () => {
   const time = formatDate(new Date());
 
   try {
-    const response = await fetch(`http://${host}:${messagePort}/post`, {
+    const response = await fetch(`https://${host}:${messagePort}/post`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

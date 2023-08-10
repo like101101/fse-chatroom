@@ -14,7 +14,7 @@ const login = async () => {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
   
-    const response = await fetch(`http://${host}:${userport}/login`, {
+    const response = await fetch(`https://${host}:${userport}/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -41,7 +41,7 @@ const register = async () => {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
-    const response = await fetch(`http://${host}:${userport}/register`, {
+    const response = await fetch(`https://${host}:${userport}/register`, {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json'
