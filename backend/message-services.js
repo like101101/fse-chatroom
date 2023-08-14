@@ -1,9 +1,10 @@
 const express = require('express');
-const http = require('http');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const ws = require('ws');
+const https = require('https')
+const fs = require('fs')
 const secret = 'kel4';
 
 // Database Models 
@@ -110,6 +111,6 @@ app.post('/post', verifyToken, async (req, res) => {
 
 
 // Start the server
-server.listen(3001, () => {
-  console.log('Message server is running on port 3001');
+server.listen(3002, () => {
+  console.log('Message server is running on port 3002');
 });

@@ -11,12 +11,7 @@ const User = require('./models/user');
 // Create the express app
 const app = express();
 app.use(bodyParser.json());
-app.use(cors({
-  origin: 'https://fse-chatroom-frontend.s3.amazonaws.com',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true,
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+app.use(cors());
 
 // Login Function
 app.post('/login', async(req, res) => {
@@ -59,6 +54,6 @@ app.post('/register', async (req, res) => {
 });
 
 // Start the server
-app.listen(3000, () => {
-  console.log('User server is running on port 3000');
+app.listen(3001, () => {
+  console.log('User server is running on port 3001');
 });
