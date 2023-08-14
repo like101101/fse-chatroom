@@ -2,7 +2,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
+const https = require('https')
 const secret = 'kel4';
+const cred = require('./ssl-cert/cred');
+const port = 3001;
 
 
 // Database Models 
@@ -54,6 +57,7 @@ app.post('/register', async (req, res) => {
 });
 
 // Start the server
-app.listen(3001, () => {
-  console.log('User server is running on port 3001');
-});
+const server = https.createServer(cred, app)
+server.listen(port, () => {
+  console.log('User API server is running on port ', port);
+})

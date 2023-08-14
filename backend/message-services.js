@@ -4,8 +4,10 @@ const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const ws = require('ws');
 const https = require('https')
-const fs = require('fs')
 const secret = 'kel4';
+const cred = require('./ssl-cert/cred');
+const port = 3002;
+
 
 // Database Models 
 const Message = require('./models/message');
@@ -13,15 +15,10 @@ const Message = require('./models/message');
 // Create the express app
 const app = express();
 app.use(bodyParser.json());
-app.use(cors({
-  origin: 'https://fse-chatroom-frontend.s3.amazonaws.com',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true,
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+app.use(cors());
 
 // Websocket server
-const server = http.createServer(app);
+const server = https.createServer(cred, app)
 const wss = new ws.Server({ server });
 
 // Token verification helper function
@@ -108,9 +105,7 @@ app.post('/post', verifyToken, async (req, res) => {
   }
 });
 
-
-
 // Start the server
-server.listen(3002, () => {
-  console.log('Message server is running on port 3002');
-});
+server.listen(port, () => {
+  console.log('Message API server is running on port ', port);
+})
