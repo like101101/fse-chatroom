@@ -6,8 +6,8 @@ if (!token) {
 }
 
 // define macros
-const host = '44.208.22.126';
-const messagePort = '3001';
+const host = '44.217.82.107';
+const messagePort = '3002';
 
 
 // Date formating function
@@ -88,7 +88,7 @@ function displayMessages(messages) {
 // websocket to display messages function
 const messageContainer = document.getElementById('message-list');
 
-const socket = new WebSocket(`ws://${host}:${messagePort}`);
+const socket = new WebSocket(`wss://${host}:${messagePort}`);
 socket.addEventListener('message', (event) => {
   const messages = JSON.parse(event.data);
   displayMessages(messages);

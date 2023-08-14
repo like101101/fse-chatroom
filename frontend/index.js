@@ -1,6 +1,6 @@
 // define macros
-const host = '44.208.22.126';
-const userport = '3000';
+const host = '44.217.82.107';
+const userport = '3001';
 
 // If the user is already logged in, redirect to the app page
 const token = localStorage.getItem('token');
