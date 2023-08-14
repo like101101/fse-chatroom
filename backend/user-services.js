@@ -22,7 +22,6 @@ app.post('/login', async(req, res) => {
 
   try {
     const user = await User.findOne({ where: { username, password } });
-
     if (user) {
       const token = jwt.sign({ username: user.username }, secret);
       res.status(200).json({ message: 'Login successful', token});
